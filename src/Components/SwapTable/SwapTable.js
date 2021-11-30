@@ -42,36 +42,38 @@ export default function DenseTable() {
       dataChange[currentDataIndex + 1] = temp;
     }
     setData([...dataChange]);
-    console.log("working");
-    console.log(data);
   };
 
   const dataRow = () => {
-    return data.map((row) => (
+    return data.map((row, index) => (
       <TableRow
         key={row._id}
         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       >
         <TableCell component="th" scope="row">
-          <IconButton
-            color="secondary"
-            aria-label="add an alarm"
-            onClick={() => handelChange(row, true)}
-          >
-            <ArrowUpwardIcon />
-          </IconButton>
+          {!(index === 0) && (
+            <IconButton
+              color="secondary"
+              aria-label="add an alarm"
+              onClick={() => handelChange(row, true)}
+            >
+              <ArrowUpwardIcon />
+            </IconButton>
+          )}
         </TableCell>
         <TableCell align="right">{row.firstName}</TableCell>
         <TableCell align="right">{row.lastName}</TableCell>
         <TableCell align="right">{row.email}</TableCell>
         <TableCell align="right">
-          <IconButton
-            color="secondary"
-            aria-label="add an alarm"
-            onClick={() => handelChange(row, false)}
-          >
-            <ArrowDownwardIcon />
-          </IconButton>
+          {!(index === data.length - 1) && (
+            <IconButton
+              color="secondary"
+              aria-label="add an alarm"
+              onClick={() => handelChange(row, false)}
+            >
+              <ArrowDownwardIcon />
+            </IconButton>
+          )}
         </TableCell>
       </TableRow>
     ));
